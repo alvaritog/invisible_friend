@@ -1,0 +1,23 @@
+<h1>Estas son las listas guardadas:</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @player_lists.each do |player_list| %>
+  <tr>
+    <td><%= player_list.name %></td>
+    <td><%= link_to 'Ver', player_list %></td>
+    <td><%= link_to 'Editar', edit_player_list_path(player_list) %></td>
+    <td><%= link_to 'Eliminar', player_list, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Crear nueva lista', new_player_list_path %>

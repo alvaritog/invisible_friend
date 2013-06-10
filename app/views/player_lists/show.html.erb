@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nombre de la lista:</b><%= @player_list.name %>
+</p>
+
+<h2> PARTICIPANTES: </h2>
+
+  <table class="table_list big_margin">
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th class="destinies_info" style="display:none">Destinatario</th>
+      <th>Destinatarios prohibidos</th>
+      <th></th>
+    </tr>
+
+  <% @player_list.players.each do |player| %>
+    <tr class="list_style_<%= cycle(0,1) %>">
+      <td><%= player.name %></td>
+      <td><%= player.email %></td>
+      <td class="destinies_info" style="display:none"><%= player.destiny.nil? ? 'Sin asignar' : player.destiny.name %></td>
+      <td><%= player.forbidden_destinies.collect(&:name).join ', ' %></td>
+      <td><%= link_to 'Editar', edit_player_list_player_path(@player_list, player) %>
+          | <%= link_to 'Borrar', player_list_player_path(@player_list, player), :confirm => 'Borrar el plarticipante, ¿seguro?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+
+  <p>
+    <%= link_to 'Añadir participante', new_player_list_player_path(@player_list) %>
+  </p>
+
+<% if @player_list.valid_assignments? %>
+
+  <p>
+    <%= link_to_function 'Ocultar/mostrar destinatarios', "$('.destinies_info').toggle();" %>
+  </p>
+
+  <p>
+    <%= link_to 'Anular sorteo', player_list_path(@player_list, :op => 'clear') %>
+  </p>
+
+  <p>
+    <%= link_to 'Repetir sorteo', player_list_path(@player_list, :op => 'raffle') %>
+  </p>
+
+  <p>
+    <%= link_to 'Enviar resultados del sorteo a los participantes', player_list_path(@player_list, :op => 'send') %>
+  </p>
+
+<% else %>
+
+  <p>
+    <%= link_to 'Realizar sorteo', player_list_path(@player_list, :op => 'raffle') %>
+  </p>
+
+<% end %>
+
+<p>
+  <%= link_to 'Editar', edit_player_list_path(@player_list) %> |
+  <%= link_to 'Atras', player_lists_path %>
+</p>
+

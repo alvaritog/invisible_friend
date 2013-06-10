@@ -1,0 +1,16 @@
+<% if flash[:error] -%>
+  <span class='error'><%=h flash[:error] %></span>
+<% end -%>
+<% if flash[:alert] -%>
+  <span class='alert'><%=h flash[:alert] %></span>
+<% end -%>
+<% if flash[:warning] -%>
+  <span class='warning'><%=h flash[:warning] %></span>
+<% end -%>
+<% if flash[:notice] -%>
+  <div class='notice'><%=h flash[:notice] %></div>
+<% end -%>
+<% if flash[:info] -%>
+  <span class='info'><%=h flash[:info] %></span>
+<% end -%>
+

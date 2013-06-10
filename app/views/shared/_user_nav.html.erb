@@ -1,0 +1,13 @@
+<div id="user_nav" style="ackground-color: rgba(39,108,28,0.3); margin-top: 12px; margin-right: 10px; padding: 2px 15px;">
+
+  <% if user_signed_in? %>
+    <span class="bold block white">Hola <%= current_user.email %>!</span>
+    <%= link_to "Mi perfil",      edit_user_registration_path ,  :class => 'block white' %>
+    <%= link_to "Mis listas",     player_lists_path,             :class => 'block white' %>
+    <%= link_to "Desconectar",    destroy_user_session_path, :method => :delete,   :class => 'block white' %>
+  <% else %>
+    <span class="bold block white">No estás registrado.</span>
+    <span class="block white"><%= link_to "Inicia sesión",   new_user_session_path, :class => 'white' %> o <%= link_to "Crea una cuenta", new_user_registration_path, :class => 'white' %></span>
+
+  <% end %>
+</div>
